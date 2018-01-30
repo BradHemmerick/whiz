@@ -41,11 +41,22 @@ router.get("/:id", function (req, res) {
     }
   }).then(function (dbComments) {
 
+    function populate(){
+        try { req.session.user.currentUser.name }
+        catch(error){
+          if(error){
+            console.log(error, "coming from here")
+            return "*"
+          }
+        }
+      return req.session.user.currentUser.username
+    }
+    console.log(req.session);
     var allTheComments = {
       comments: [],
       form: "<form id='newComment'>" +
-        "<h4 class='newInfo'>User: *</h4>" +
-        "<h4 class='newInfo'>Comment *</h4>" +
+        `<h4 class='newInfo'>User: <span id='user'>${ populate()}</span></h4>` +
+        `<h4 class='newInfo'>Comment *</h4>` +
         "<input type='text' min='0' name='comment' class='form-control' id='comment' placeholder='Your comment goes here'>" +
 
         "<input type='submit' value='Post a comment!' class='btn btn-primary' id='submit'>" +

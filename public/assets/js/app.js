@@ -161,12 +161,12 @@ function initMap() {
 		$("#error2").empty();
 
 		var newComment = {
-			user: $("#user").val().trim(),
+			user: $("#user").text().trim(),
 			comment: $("#comment").val().trim(),
 		}
 
 
-		if (newComment.user === "" || newComment.comment === "") {
+		if (newComment.comment === "") {
 			$("#error2").text("Please fill out both fields before submitting")
 		} 
 		else {
