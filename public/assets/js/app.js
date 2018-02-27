@@ -6,6 +6,12 @@ var userLat = [];
 var userLong = [];
 var markerContent = [];
 var currentInfoWindow = null;
+var user = {}
+$.get("/api/session").then(function (res) {
+	console.log(res, "session response")
+	user = res;
+	console.log(user, "user");
+})
 
 
 //initialize google maps
@@ -188,17 +194,33 @@ function initMap() {
 
 	$(document).on("click", ".deleteComment", function (event) {
 		event.stopPropagation();
+		console.log($(this))
+		console.log($(this).attr("data-user"))
+		var commentUser = $(this).attr("data-user");
+
+
 
 		var id = {
 			id_comment: $(this).data("id")
 		}
-
-		$.ajax("/" + thePlacePath + "/" + id.id_comment, {
+		if (commentUser == user.currentUser.username ) {
+			$.ajax("/" + thePlacePath + "/" + id.id_comment, {
 			method: "DELETE",
 			data: id
 		}).done(function () {
 			location.reload()
 		});
+		}else{
+			console.log("jiggle button");
+			console.log("need to be user brah");
+		}
+
+		// $.ajax("/" + thePlacePath + "/" + id.id_comment, {
+		// 	method: "DELETE",
+		// 	data: id
+		// }).done(function () {
+		// 	location.reload()
+		// });
 	});
 
 
@@ -733,6 +755,8 @@ function clickPlace(button) {
 		data: allComments
 	}).done(function () {
 		// console.log("Got comments with ID = " + allComments.placeId);
+
+
 		window.location.href = '/' + allComments.placeId
 
 		// if (location.pathname === "/" + currentPlaceId) {

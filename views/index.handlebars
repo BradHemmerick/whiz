@@ -124,6 +124,7 @@
                                 <p>{{this.comment}}</p>
                             </div>
                             <div class="card-action">
+                                
                                 <p>This comment has
                                     <inline class="upVote-{{this.id}}" data-upVote="{{this.upVotes}}">{{this.upVotes}}</inline> up votes and
                                     <inline class="downVote-{{this.id}}" data-downVote="{{this.downVotes}}">{{this.downVotes}}</inline> down votes</p>
@@ -136,7 +137,7 @@
                                 <button data-id="{{this.id}}" data-voted="false" class="dislikeComment btn-flat">
                                     <i class="material-icons">thumb_down</i>
                                 </button>
-                                <button data-id="{{this.id}}" class="deleteComment btn-floating btn-large waves-effect waves-light red">
+                                <button data-id="{{this.id}}" data-user={{this.user}} class="deleteComment btn-floating btn-large waves-effect waves-light red">
                                     <i class="material-icons">delete</i>
                                 </button>
                             </div>

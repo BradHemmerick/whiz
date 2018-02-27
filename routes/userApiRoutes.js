@@ -39,7 +39,7 @@ module.exports = function (app) {
           req.session.user.currentUser = user;
           req.session.user.loggedIn = true;
           // console.log(req.session.user)
-          // res.json(req.session.user)
+          // req.session.user = user;
 
           var whizUser = {
             personOfInterest: user.username
@@ -65,5 +65,11 @@ module.exports = function (app) {
       res.json(dbData);
     });
     res.end();
+  });
+
+
+
+  app.get("/api/session", function (req, res) {
+      res.json(req.session.user);
   });
 }
